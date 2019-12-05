@@ -1,0 +1,11 @@
+{
+  "verbose": true,
+  "ignore": ["*.spec.js", "flow-typed", "docs", "schemas", "node_modules"],
+  "delay": 900,
+  "watch": ["src", "packages"],
+  "ext": "js,json,ts,tsx",
+  "execMap": {
+    "js": "babel-node",
+    "ts": "babel-node"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "twistta-service",
+  "version": "1.0.0",
+  "description": "This is a service for a social media application",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "yarn babel-node ./index.js",
+    "graphql": "nodemon"
+  },
+  "author": "Laís Lima",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.9.12",
+    "apollo-server-express": "^2.9.12",
+    "apollo-server-testing": "^2.9.12",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "graphql": "^14.5.8",
+    "mongoose": "^5.7.13"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "nodemon": "^2.0.1"
+  }
+}

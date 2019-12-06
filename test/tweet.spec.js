@@ -1,6 +1,8 @@
 import { graphql } from 'graphql';
+import mongoose from 'mongoose';
 import { connectMongoose, createUser, clearDatabase, createTweet } from './helper';
 import { schema } from '../src/schema';
+const { ObjectId } = mongoose.Types;
 
 describe('tweet test', () => {
   beforeAll(async() => {
@@ -11,19 +13,24 @@ describe('tweet test', () => {
     const text1 = 'Hello People! I wanna show u my graphQL!';
     const text2 = 'Suck my graphQL!';
     const { _id } = await createUser('jon snow', 'jon@stark.com', '543212');
-    console.log('ID', _id)
-    const tweet1 = await createTweet(_id, text1);
-    const tweet2 = await createTweet(_id, text2);
+    await createTweet(_id, text1);
+    await createTweet(_id, text2);
+    global.authorId = ObjectId(_id)
     const query = `
-      query Q{
-        tweets(author: $id) {
+      query Q($id: ID!){
+        tweets(id: $id) {
           text
         }
       }
     `
-    const res = await graphql(schema, query, {}, {}, {id: _id});
-    console.log("REEEEES=>>>>>", res)
-    // expect(tweet1.text).toBe(text1);
-    // expect(tweet2.text).toBe(text2);
+    const variables = {
+      id: global.authorId.toString(),
+    }
+
+    const { data: { tweets } } = await graphql(schema, query, {}, {}, variables);
+    console.log(tweets)
+    expect(tweets).toMatchSnapshot();
+    expect(tweets[0].text).toBe(text1);
+    expect(tweets[1].text).toBe(text2);
   })
 })

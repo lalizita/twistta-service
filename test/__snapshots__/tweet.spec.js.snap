@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tweet test it should return a tweets list of a user 1`] = `
+Array [
+  Object {
+    "text": "Hello People! I wanna show u my graphQL!",
+  },
+  Object {
+    "text": "Suck my graphQL!",
+  },
+]
+`;

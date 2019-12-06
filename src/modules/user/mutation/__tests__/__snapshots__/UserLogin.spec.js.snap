@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User register test Should make a login if the credentials are valid 1`] = `
+Object {
+  "username": "lais_registrada",
+}
+`;

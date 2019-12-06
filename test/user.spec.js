@@ -7,18 +7,18 @@ describe('user test', () => {
     await connectMongoose();
   })
   beforeEach(async() => await clearDatabase())
-  it('it show exists a user with called jon snow', async () => {
-    const { username, email } = await createUser('jon snow', 'jon@stark.com', '543212');
-    const query = `
-      query Q{
-        users {
-          username
-          email
-        }
-      }
-    `
-    const { data: { users } } = await graphql(schema, query);
-    expect(users[0].username).toBe(username);
-    expect(users[0].email).toBe(email);
-  })
+  // it('it show exists a user with called jon snow', async () => {
+  //   const { username, email } = await createUser('jon snow', 'jon@stark.com', '543212');
+  //   const query = `
+  //     query Q{
+  //       users {
+  //         username
+  //         email
+  //       }
+  //     }
+  //   `
+  //   const { data: { users } } = await graphql(schema, query);
+  //   expect(users[0].username).toBe(username);
+  //   expect(users[0].email).toBe(email);
+  // })
 })

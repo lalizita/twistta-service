@@ -1,6 +1,7 @@
 import { GraphQLString, GraphQLNonNull } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 import UserModel from '../../../models/User';
+import { generateToken } from '../../../auth';
 
 export default mutationWithClientMutationId({
   name: 'RegisterUsername',
@@ -23,12 +24,16 @@ export default mutationWithClientMutationId({
     });
 
     await user.save();
-    return user
+    return { username:user.username, token: generateToken(user)}
   },
   outputFields: {
     username: {
       type: GraphQLString,
       resolve: ({ username }) =>  username
+    },
+    token: {
+      type: GraphQLString,
+      resolve: ({ token }) => token
     }
   }
 })

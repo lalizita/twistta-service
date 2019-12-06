@@ -1,6 +1,5 @@
 import { graphql } from 'graphql';
 import { connectMongoose } from '../../../../../test/helper';
-import UserModel from '../../../../models/User';
 import { schema } from '../../../../schema'
 
 describe('User register test', () => {
@@ -30,6 +29,8 @@ describe('User register test', () => {
       }
     `
     const variables = userObject
-    const res = await graphql(schema, query, {}, {}, variables)
+    const { data: { UserRegister } } = await graphql(schema, query, {}, {}, variables)
+    expect(UserRegister).toMatchSnapshot();
+    expect(UserRegister.username).toBe(userObject.username)
   })
 })

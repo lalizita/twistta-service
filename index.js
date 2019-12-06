@@ -4,7 +4,13 @@ import connectDatabase from './src/database';
 import { schema } from './src/schema';
 
 (async () => {
-  await connectDatabase();
+  try {
+    await connectDatabase();
+  } catch(error) {
+    console.log("could not connect to database", {error})
+    throw error
+  }
+
   const server = new ApolloServer({ schema });
   const app = express();
   server.applyMiddleware({ app });

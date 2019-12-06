@@ -13,19 +13,17 @@ const QueryType = new GraphQLObjectType({
        resolve: (source, args, context, info) => {
          return User.find();
        },
-       tweets: {
-         type: GraphQLList(TweetType),
-         args: {
-           id: {
-             type: new GraphQLNonNull(GraphQLID)
-           }
-         },
-         resolve: (source, args) => {
-           console.log("ENTROU NO RESOLVE")
-          return Tweet.find({ author: args.id })
-         }
-       }
      },
+    tweets: {
+      type: GraphQLList(TweetType),
+     //  args: {
+     //    id: "5de9981e5d79b4e1efa4d904"
+     //  },
+      resolve: (source, args) => {
+        console.log("ENTROU NO RESOLVE")
+       return Tweet.find({ author: "5de9981e5d79b4e1efa4d904" })
+      }
+    },
   })
 })
 

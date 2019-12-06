@@ -16,12 +16,12 @@ describe('tweet test', () => {
     const tweet2 = await createTweet(_id, text2);
     const query = `
       query Q{
-        tweets(autor: $id) {
+        tweets(author: $id) {
           text
         }
       }
     `
-    const res = await graphql(schema, query);
+    const res = await graphql(schema, query, {}, {}, {id: _id});
     console.log("REEEEES=>>>>>", res)
     // expect(tweet1.text).toBe(text1);
     // expect(tweet2.text).toBe(text2);

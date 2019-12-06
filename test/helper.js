@@ -3,6 +3,8 @@ import TweetModel from '../src/models/Tweet';
 import mongoose from 'mongoose';
 import connectDatabase from '../src/database';
 
+const { ObjectId } = mongoose.Types;
+
 export async function connectMongoose(URI = 'mongodb://localhost/twistta-service'){
   await connectDatabase(URI, { useNewUrlParser: true })
 }
@@ -20,9 +22,10 @@ export async function createUser(username = 'Jon Snow', email='john_snow@mail.co
   return user
 }
 
-export async function createTweet(text= 'I know nothing', author){
-  await new TweetModel({
-    author: author,
+export async function createTweet(author, text= 'I know nothing'){
+  const tweet = await new TweetModel({
+    author: ObjectId(author) ,
     text,
   }).save();
+  return tweet;
 }

@@ -1,5 +1,5 @@
 import { graphql } from 'graphql';
-import { connectMongoose, createUser, clearDatabase } from './helper';
+import { connectMongoose, createUser, clearDatabase, createTweet } from './helper';
 import { schema } from '../src/schema';
 
 describe('user test', () => {
@@ -8,7 +8,7 @@ describe('user test', () => {
   })
   beforeEach(async() => await clearDatabase())
   it('it show exists a user with called jon snow', async () => {
-    const { _id, username, email } = await createUser('jon snow', 'jon@stark.com', '543212');
+    const { username, email } = await createUser('jon snow', 'jon@stark.com', '543212');
     const query = `
       query Q{
         users {

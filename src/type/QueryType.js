@@ -24,7 +24,7 @@ const QueryType = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLID),
         }
       },
-      resolve: (source, args) => {
+      resolve: (source, args, context) => {
        return Tweet.find({ author: args.id })
       }
     },

@@ -11,6 +11,10 @@ const TweetType = new GraphQLObjectType({
         return tweet.author
       }
     },
+    parent: {
+      type: GraphQLID,
+      resolve: tweet => tweet.parent
+    },
     text: {
       type: GraphQLString,
       resolve: tweet => tweet.text

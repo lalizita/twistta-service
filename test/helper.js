@@ -7,11 +7,11 @@ const { ObjectId } = mongoose.Types;
 
 export async function connectMongoose(URI = 'mongodb://localhost/twistta-service'){
   await connectDatabase(URI, { useNewUrlParser: true })
-}
+};
 
 export async function clearDatabase() {
   await mongoose.connection.db.dropDatabase();
-}
+};
 
 export async function createUser(username = 'Jon Snow', email='john_snow@mail.com', password='123456'){
   const user  = await new UserModel({
@@ -20,7 +20,7 @@ export async function createUser(username = 'Jon Snow', email='john_snow@mail.co
     password
   }).save();
   return user
-}
+};
 
 export async function createTweet(author, text= 'I know nothing'){
   const tweet = await new TweetModel({
@@ -28,4 +28,4 @@ export async function createTweet(author, text= 'I know nothing'){
     text,
   }).save();
   return tweet;
-}
+};

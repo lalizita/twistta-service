@@ -1,7 +1,8 @@
-import { ApolloServer, graphqlExpress } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import connectDatabase from './src/database';
 import { schema } from './src/schema';
+import { getUser } from './src/auth';
 
 (async () => {
   try {
@@ -11,7 +12,20 @@ import { schema } from './src/schema';
     throw error
   }
 
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer({ 
+    schema,
+    context: async ({ req }) => {
+      const token = req.headers.authorization || '';
+      try{
+        const user = await getUser(token);
+        return user
+        
+      } catch(error){
+        console.log("Unable to authenticate using auth token", error)
+      }
+      // console.log('user =>', user)
+    }
+   });
   const app = express();
   server.applyMiddleware({ app });
   app.listen({ port: 4000 }, () =>

@@ -17,8 +17,8 @@ export default mutationWithClientMutationId({
       type: new GraphQLNonNull(GraphQLString)
     },
   },
-  mutateAndGetPayload: async ({ author, parent, text }) => {
-
+  mutateAndGetPayload: async ({ author, parent, text }, args, context) => {
+    console.log("CONTEXT", context)
     let tweet = new TweetModel({
       author,
       parent,

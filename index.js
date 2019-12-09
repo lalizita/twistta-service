@@ -15,6 +15,7 @@ import { getUser } from './src/auth';
   const server = new ApolloServer({ 
     schema,
     context: async ({ req }) => {
+      console.log("REQ =====", req)
       const token = req.headers.authorization || '';
       try{
         const user = await getUser(token);
@@ -23,7 +24,10 @@ import { getUser } from './src/auth';
       } catch(error){
         console.log("Unable to authenticate using auth token", error)
       }
-      // console.log('user =>', user)
+      return {
+        req,
+        user,
+      }
     }
    });
   const app = express();

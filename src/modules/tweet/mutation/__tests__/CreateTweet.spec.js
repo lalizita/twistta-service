@@ -72,7 +72,6 @@ it('Should not create a tweet correctly', async() => {
       text: "Hello tweet!"
     }
     const { data: { CreateTweet } } = await graphql(schema, query, {}, {}, variables)
-    console.log("CREATE TWEET", CreateTweet)
     expect(CreateTweet.tweets[0].text).toBe("Hello tweet!")
     expect(CreateTweet.tweets[0].author).toBe(global.authorId.toString())
     expect(CreateTweet.tweets[0].parent).toBe(null)

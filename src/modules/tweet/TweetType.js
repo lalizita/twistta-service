@@ -6,10 +6,7 @@ const TweetType = new GraphQLObjectType({
   fields: () => ({
     author: {
       type: new GraphQLNonNull(GraphQLID),
-      resolve: tweet => {
-        console.log("TWEET =>>>>>>", tweet)
-        return tweet.author
-      }
+      resolve: tweet => tweet.author
     },
     parent: {
       type: GraphQLID,

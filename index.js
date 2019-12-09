@@ -15,7 +15,6 @@ import { getUser } from './src/auth';
   const server = new ApolloServer({ 
     schema,
     context: async ({ req }) => {
-      console.log("REQ =====", req)
       const token = req.headers.authorization || '';
       try{
         const user = await getUser(token);

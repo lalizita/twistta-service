@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "yarn babel-node ./index.js",
-    "graphql": "nodemon"
+    "graphql": "nodemon",
+    "update-schema": "babel-node --extensions \".es6,.js,.es,.jsx,.mjs,.ts\" ./src/scripts/updateSchema.js"
   },
   "author": "Laís Lima",
   "license": "ISC",

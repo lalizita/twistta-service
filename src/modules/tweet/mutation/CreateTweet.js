@@ -2,7 +2,6 @@ import { GraphQLString, GraphQLNonNull, GraphQLID, GraphQLList } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 import TweetModel from '../../../models/Tweet';
 import TweetType from '../../../modules/tweet/TweetType';
-import { generateToken } from '../../../auth';
 
 export default mutationWithClientMutationId({
   name: 'CreateTweet',
@@ -17,8 +16,8 @@ export default mutationWithClientMutationId({
       type: new GraphQLNonNull(GraphQLString)
     },
   },
-  mutateAndGetPayload: async ({ author, parent, text }, args, context) => {
-    console.log("CONTEXT", context)
+  mutateAndGetPayload: async ({ author, parent, text }, context) => {
+    if(!context.user) return {error: "Usuário não está logado"}
     let tweet = new TweetModel({
       author,
       parent,
@@ -28,7 +27,6 @@ export default mutationWithClientMutationId({
     await tweet.save();
 
     const tweetsListByAuthor = await TweetModel.find({ author })
-    console.log("TWEETS BY", tweetsListByAuthor)
     return {tweetsListByAuthor}
   },
   outputFields: {

@@ -1,0 +1,64 @@
+input CreateTweetInput {
+  author: ID!
+  parent: String
+  text: String!
+  clientMutationId: String
+}
+
+type CreateTweetPayload {
+  tweets: [Tweet]
+  error: String
+  clientMutationId: String
+}
+
+type Mutation {
+  UserRegister(input: RegisterUsernameInput!): RegisterUsernamePayload
+  UserLogin(input: UserLoginInput!): UserLoginPayload
+  CreateTweet(input: CreateTweetInput!): CreateTweetPayload
+}
+
+"""Query of users"""
+type Query {
+  users: [User]
+  tweets(id: ID!): [Tweet]
+}
+
+input RegisterUsernameInput {
+  username: String!
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type RegisterUsernamePayload {
+  username: String
+  token: String
+  clientMutationId: String
+}
+
+"""Tweets of a user"""
+type Tweet {
+  author: ID!
+  parent: ID
+  text: String
+}
+
+"""user data"""
+type User {
+  _id: String
+  username: String!
+  active: Boolean
+  email: String!
+}
+
+input UserLoginInput {
+  username: String!
+  password: String!
+  clientMutationId: String
+}
+
+type UserLoginPayload {
+  token: String
+  error: String
+  clientMutationId: String
+}

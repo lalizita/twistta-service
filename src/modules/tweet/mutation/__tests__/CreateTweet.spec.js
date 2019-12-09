@@ -30,8 +30,9 @@ it("Sould not create a tweet if user is not autenticated", async() => {
       username: 'caroline',
       password: '123456'
     }
-    
-    await graphql(schema, query, {}, {}, variables)
+    const {
+      data: { UserLogin }
+    } = await graphql(schema, query, {}, {}, variables)
 
     const queryTweet = `
       mutation M(
